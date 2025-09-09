@@ -14,8 +14,100 @@
 
     <!-- Navbar -->
     <div class="w-full flex items-center justify-between px-6 py-6 bg-gray-100 shadow">
-        <div class="flex-1"></div>
-        <div class="flex-1 flex justify-center">
+        <div id="menu_toggle" class="flex-1 xl:hidden lg:hidden block"><i class="fa-solid fa-bars text-xl"></i></div>
+
+        <div id="menu_sidebar" class="fixed inset-0 bg-black/50 h-full w-full z-20  hidden">
+            <div
+                class="menu_coming absolute left-0 flex flex-col bg-white h-full w-[80%] sm:w-[60%] md:w-[40%] lg:w-[300px] px-2 shadow-lg overflow-y-auto">
+                <ul class="flex flex-col gap-4 text-md text-gray-500 mt-6 uppercase w-full">
+
+                    <!-- Home -->
+                    <li
+                        class="w-full hover:bg-gray-100  rounded border-b border-gray-300 p-2 transition duration-300 ease-in-out">
+                        <div
+                            class="flex items-center justify-between cursor-pointer hover:text-[#ff4e00] dropdown-toggle">
+                            <span>Home</span>
+                            <i class="fa-solid fa-plus transition-transform duration-300"></i>
+                        </div>
+                        <ul class="hidden flex-col gap-2 mt-2 ml-4 text-base text-gray-600 transition dropdown-menu">
+                            <li class="hover:text-black cursor-pointer">Homepage v1</li>
+                            <li class="hover:text-black cursor-pointer">Homepage v2</li>
+                        </ul>
+                    </li>
+
+                    <!-- Sale -->
+                    <li
+                        class="w-full hover:bg-gray-100  rounded border-b border-gray-300 p-2 transition duration-300 ease-in-out">
+                        <div
+                            class="flex items-center justify-between cursor-pointer hover:text-[#ff4e00] dropdown-toggle">
+                            <span>Sale</span>
+                            <i class="fa-solid fa-plus transition-transform"></i>
+                        </div>
+                        <ul class="hidden flex-col gap-2 mt-2 ml-4 text-base text-gray-600 dropdown-menu">
+                            <li class="hover:text-black cursor-pointer">Flat 50%</li>
+                            <li class="hover:text-black cursor-pointer">Clearance</li>
+                        </ul>
+                    </li>
+
+                    <!-- Women -->
+                    <li
+                        class="w-full hover:bg-gray-100  rounded border-b border-gray-300 p-2 transition duration-300 ease-in-out">
+                        <div
+                            class="flex items-center justify-between cursor-pointer hover:text-[#ff4e00] dropdown-toggle">
+                            <span>Women</span>
+                            <i class="fa-solid fa-plus transition-transform"></i>
+                        </div>
+                        <ul class="hidden flex-col gap-2 mt-2 ml-4 text-base text-gray-600 dropdown-menu">
+                            <li class="hover:text-black cursor-pointer">Ready to Wear</li>
+                            <li class="hover:text-black cursor-pointer">Unstitched</li>
+                            <li class="hover:text-black cursor-pointer">Formals</li>
+                        </ul>
+                    </li>
+
+                    <!-- Rest (no dropdowns) -->
+                    <li class="hover:text-[#ff4e00] cursor-pointer border-b border-gray-300 p-2">Unstitched</li>
+                    <li
+                        class="w-full hover:bg-gray-100  rounded border-b border-gray-300 p-2 transition duration-300 ease-in-out">
+                        <div
+                            class="flex items-center justify-between cursor-pointer hover:text-[#ff4e00] dropdown-toggle">
+                            <span>Kids</span>
+                            <i class="fa-solid fa-plus transition-transform "></i>
+                        </div>
+                        <ul class="hidden flex-col gap-2 mt-2 ml-4 text-base text-gray-600 dropdown-menu">
+                            <li class="hover:text-black cursor-pointer">Ready to Wear</li>
+                            <li class="hover:text-black cursor-pointer">Unstitched</li>
+                            <li class="hover:text-black cursor-pointer">Formals</li>
+                        </ul>
+                    </li>
+                    <li
+                        class="w-full hover:bg-gray-100  rounded border-b border-gray-300 p-2 transition duration-300 ease-in-out">
+                        <div
+                            class="flex items-center justify-between cursor-pointer hover:text-[#ff4e00] dropdown-toggle">
+                            <span>Men</span>
+                            <i class="fa-solid fa-plus transition-transform"></i>
+                        </div>
+                        <ul class="hidden flex-col gap-2 mt-2 ml-4 text-base text-gray-600 dropdown-menu">
+                            <li class="hover:text-black cursor-pointer">Ready to Wear</li>
+                            <li class="hover:text-black cursor-pointer ">Unstitched</li>
+                            <li class="hover:text-black cursor-pointer">Formals</li>
+                        </ul>
+                    </li>
+                    <li class="hover:text-[#ff4e00] cursor-pointer border-b border-gray-300 p-2">Fragrances</li>
+                    <li class="hover:text-[#ff4e00] cursor-pointer border-b border-gray-300 p-2">Sweaters</li>
+                    <li class="hover:text-[#ff4e00] cursor-pointer border-b border-gray-300 p-2">Eid Formals</li>
+                    <li class="hover:text-[#ff4e00] cursor-pointer border-b border-gray-300 p-2"><i
+                            class="fa-solid fa-magnifying-glass pe-2"></i>Search</li>
+                    <li class="hover:text-[#ff4e00] cursor-pointer border-b border-gray-300 p-2"><i
+                            class="fa-regular fa-user pe-2"></i>Login/Register</li>
+                </ul>
+            </div>
+
+        </div>
+
+
+
+
+        <div class="flex-1 flex items-center xl:block lg:block justify-center">
             <img src="./images/Bonanza_Logo.avif" alt="Logo" class="h-10">
         </div>
         <div class="flex-1 flex justify-end space-x-4 text-2xl">
@@ -41,11 +133,13 @@
                         <input type="text" class="border text-base px-3 py-2 w-full" placeholder="Username">
                         <input type="password" class="border text-base px-3 py-2 w-full mt-3" placeholder="Password">
 
-                        <p class="text-sm text-gray-500 underline hover:text-[#66CFE1] transition cursor-pointer">forget
+                        <p class="text-sm text-gray-500 underline hover:text-[#66CFE1] transition cursor-pointer">
+                            forget
                             password?</p>
                         <button
                             class="bg-red-700 text-white text-base px-4 py-2 w-full rounded hover:bg-red-800">Signin</button>
-                        <p class="text-sm text-gray-500 underline transition hover:text-[#66CFE1] cursor-pointer">New
+                        <p class="text-sm text-gray-500 underline transition hover:text-[#66CFE1] cursor-pointer">
+                            New
                             customer? Create your account</p>
 
                     </div>
@@ -58,7 +152,8 @@
                     class="absolute right-0 flex flex-col items-center bg-white  h-full w-90 p-5 transform translate-x-full transition-transform duration-300 ease-in-out ">
 
                     <div class="relatives flex flex-col items-center gap-4 w-full py-3 ">
-                        <p class="text-sm text-gray-500 underline transition hover:text-[#66CFE1] cursor-pointer">Your
+                        <p class="text-sm text-gray-500 underline transition hover:text-[#66CFE1] cursor-pointer">
+                            Your
                             Wishlist is empty</p>
                     </div>
                     <div class="p-[.3px] bg-gray-300 w-full"></div>
@@ -118,7 +213,7 @@
     <hr class="border-none bg-gray-300 h-[1px]">
 
     <!-- Nav -->
-    <nav>
+    <nav class="xl:block lg:block hidden">
         <div class="flex items-center justify-center capitalize uppercase gap-6 p-2 font-normal relative">
 
             <a href="./home.php" class="cursor-pointer hover:text-[#56CFE1]">home</a>
@@ -275,7 +370,8 @@
                         .removeClass('translate-x-0')
                         .addClass('translate-x-full'); // slide out
                     setTimeout(() => {
-                        $('#search_sidebar').addClass('hidden'); // hide after animation
+                        $('#search_sidebar').addClass(
+                            'hidden'); // hide after animation
                     }, 300);
                 }
             });
@@ -334,6 +430,30 @@
                 }, 300);
             }
         });
+
+        $('#menu_toggle').click(function() {
+            $('#menu_sidebar').removeClass('hidden');
+        });
+
+        $('#menu_sidebar').click(function(e) {
+            if (e.target.id === 'menu_sidebar') {
+                $('#menu_sidebar').addClass('hidden');
+            }
+        });
+        $(".dropdown-toggle").click(function() {
+            const $menu = $(this).next(".dropdown-menu");
+            const $icon = $(this).find("i");
+
+            // Close other dropdowns (optional: remove if you want multiple open at once)
+            $(".dropdown-menu").not($menu).slideUp();
+            $(".dropdown-toggle i").not($icon).removeClass("rotate-45");
+
+            // Toggle current dropdown
+            $menu.stop(true, true).slideToggle(300);
+            $icon.toggleClass("rotate-45");
+        });
+
+
     });
     </script>
 

@@ -147,11 +147,17 @@
 
     </section>
 
-    <section id="fragrance_section" class="py-5">
+    <section id="fragrance_section" class="py-5 min-h-[300px]">
         <div class="grid grid-cols gap-3 md:grid-cols-2 lg:grid-cols-2">
-            <div class="bg-gray-100  flex items-center gap-3 overflow-hidden">
+            <div class="bg-gray-100 relative  flex items-center gap-3 overflow-hidden">
                 <img src="./images/fragrance_section.png" alt="fragrance-section"
                     class="w-full h-full object-cover hover:scale-110 transition-transform duration-500 ease-in-out">
+                <div class="absolute left-50 text-white text-center text-xl flex flex-col gap-5">
+                    <span class=" uppercase  text-5xl">fragrance</span>
+                    <button
+                        class="self-center uppercase text-base  bg-transparent border-1 border-white text-white py-2 px-5 hover:bg-black/50 ">shop
+                        now</button>
+                </div>
             </div>
             <div class="bg-gray-100 p-5 flex items-center gap-3">
                 <div class="container h-full mx-auto py-10">
@@ -163,27 +169,49 @@
                                 <div class="slide flex-none w-full px-2">
                                     <div class="flex space-x-4">
                                         <div class="w-1/2">
-                                            <div class=" overflow-hidden"> <img src="./images/frag-2.png"
+                                            <div class=" overflow-hidden relative "> <img src="./images/frag-2.png"
                                                     alt="Product 1"
                                                     class="w-full h-100 object-cover hover:scale-110 transition-transform duration-500 ease-in-out  rounded-lg shadow-md">
+                                                <div
+                                                    class="absolute rounded-full flex items-center justify-center bg-[#ff4e00] h-12 w-12  top-2 right-2  transition-opacity duration-300">
+                                                    <p>-25%</p>
+                                                </div>
                                             </div>
-                                            <div class="mt-2 text-center">
+                                            <div class="mt-2 ">
                                                 <h3 class="text-lg font-semibold">Product 1</h3>
                                                 <p class="text-sm text-gray-600">Elegant design, perfect for daily use.
                                                 </p>
-                                                <p class="text-md font-bold">$49.99</p>
+                                                <div class="flex">
+                                                    <p class="text-md font-bold line-through text-gray-500">$79.99</p>
+                                                    <p class="text-md font-bold text-red-500">$79.99</p>
+
+                                                </div>
+                                                <button
+                                                    class="bg-black text-white my-4 p-3 px-8 rounded-sm cursor-pointer whitespace-nowrap">Add
+                                                    to Cart</button>
                                             </div>
                                         </div>
                                         <div class="w-1/2 overflow-hidden">
-                                            <div class="overflow-hidden">
+                                            <div class="overflow-hidden relative">
                                                 <img src="./images/frag-4.png" alt="Product 2"
                                                     class="w-full h-100 object-cover hover:scale-110 transition-transform duration-500 ease-in-out  rounded-lg shadow-md">
+                                                <div
+                                                    class="absolute rounded-full flex items-center justify-center bg-[#ff4e00] h-12 w-12  top-2 right-2  transition-opacity duration-300">
+                                                    <p>-25%</p>
+                                                </div>
                                             </div>
-                                            <div class="mt-2 text-center">
+                                            <div class="mt-2 ">
                                                 <h3 class="text-lg font-semibold">Product 2</h3>
                                                 <p class="text-sm text-gray-600">Durable and stylish, a great choice.
                                                 </p>
-                                                <p class="text-md font-bold">$59.99</p>
+                                                <div class="flex">
+                                                    <p class="text-md font-bold line-through text-gray-500">$79.99</p>
+                                                    <p class="text-md font-bold text-red-500">$79.99</p>
+
+                                                </div>
+                                                <button
+                                                    class="bg-black text-white my-4 p-3 px-8 rounded-sm cursor-pointer whitespace-nowrap">Add
+                                                    to Cart</button>
                                             </div>
                                         </div>
                                     </div>
@@ -194,16 +222,17 @@
                                         <div class="w-1/2 overflow-hidden">
                                             <img src="./images/frag-3 overflow-hidden.png" alt="Product 3"
                                                 class="w-full h-100 object-cover hover:scale-110 transition-transform duration-500 ease-in-out  rounded-lg shadow-md">
-                                            <div class="mt-2 text-center">
+                                            <div class="mt-2 ">
                                                 <h3 class="text-lg font-semibold">Product 3</h3>
                                                 <p class="text-sm text-gray-600">Premium quality, long-lasting.</p>
-                                                <p class="text-md font-bold">$79.99</p>
+
                                             </div>
+
                                         </div>
                                         <div class="w-1/2 overflow-hidden">
                                             <img src="./images/frag-2.png" alt="Product 4"
                                                 class="w-full h-100 object-cover hover:scale-110 transition-transform duration-500 ease-in-out  rounded-lg shadow-md">
-                                            <div class="mt-2 text-center">
+                                            <div class="mt-2 ">
                                                 <h3 class="text-lg font-semibold">Product 4</h3>
                                                 <p class="text-sm text-gray-600">Sleek and modern, highly rated.</p>
                                                 <p class="text-md font-bold">$89.99</p>
@@ -217,7 +246,7 @@
                                         <div class="w-1/2 overflow-hidden">
                                             <img src="./images/frag-3.png" alt="Product 5"
                                                 class="w-full h-100 object-cover hover:scale-110 transition-transform duration-500 ease-in-out  rounded-lg shadow-md">
-                                            <div class="mt-2 text-center">
+                                            <div class="mt-2 ">
                                                 <h3 class="text-lg font-semibold">Product 5</h3>
                                                 <p class="text-sm text-gray-600">Comfortable and versatile.</p>
                                                 <p class="text-md font-bold">$69.99</p>
@@ -226,7 +255,7 @@
                                         <div class="w-1/2 overflow-hidden">
                                             <img src="./images/frag-4.png" alt="Product 6"
                                                 class="w-full h-100 object-cover hover:scale-110 transition-transform duration-500 ease-in-out  rounded-lg shadow-md">
-                                            <div class="mt-2 text-center">
+                                            <div class="mt-2 ">
                                                 <h3 class="text-lg font-semibold">Product 6</h3>
                                                 <p class="text-sm text-gray-600">Top-tier performance, budget-friendly.
                                                 </p>
