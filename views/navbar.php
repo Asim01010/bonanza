@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <?php include '/xampp/htdocs/BonanzaSatrangi/bootstrap.php'?>
     <title>Multi Dropdown Example</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 
@@ -17,11 +18,24 @@
         <div class="flex-1 flex justify-center">
             <img src="./images/Bonanza_Logo.avif" alt="Logo" class="h-10">
         </div>
-        <div class="flex-1 flex justify-end space-x-4">
-            <button class="p-2 bg-gray-200 rounded-full hover:bg-gray-300">🏠</button>
-            <button class="p-2 bg-gray-200 rounded-full hover:bg-gray-300">🛒</button>
-            <button class="p-2 bg-gray-200 rounded-full hover:bg-gray-300">👤</button>
+        <div class="flex-1 flex justify-end space-x-4 text-2xl">
+            <button class="search_bar"><i class="fa-solid fa-magnifying-glass font-light cursor-pointer"></i></button>
+
+            <div id="search_sidebar" class="fixed hidden bg-black/50 h-full w-full z-20  left-0 top-0">
+                <div class="absolute right-0 flex flex-col items-center bg-white h-full w-90 py-5 ">
+
+                    <div class="relatives  py-3 ">
+                        <input type="text" class="border">
+                        <button class="absolute top-8  right-12"><i class="fa-solid fa-magnifying-glass "></i></button>
+                    </div>
+                    <div class="p-[.3px] bg-gray-300 w-full"></div>
+                </div>
+            </div>
+            <button class="user_bar"><i class="fa-regular fa-user cursor-pointer"></i></button>
+            <button class=" "><i class="fa-regular fa-heart cursor-pointer"></i></button>
+            <button class=" "><i class="fa-solid fa-cart-shopping cursor-pointer"></i></button>
         </div>
+    </div>
     </div>
 
     <hr class="border-none bg-gray-300 h-[1px]">
@@ -55,7 +69,7 @@
 
             <!-- WOMEN -->
             <div id="women-container" class="relative dropdown">
-                <div id="women" class="cursor-pointer hover:text-[#56CFE1] px-1">women</div>
+                <div id="women_id" class="cursor-pointer hover:text-[#56CFE1] px-1">women</div>
                 <div id="women-dropdown"
                     class="absolute hidden  top-full mt-1 left-[-510px]  bg-white shadow-md  rounded-lg p-4 w-[1200px] gap-6 z-50">
                     <div class="w-1/2">
@@ -75,7 +89,7 @@
 
             <!-- MEN -->
             <div id="men-container" class="relative dropdown">
-                <div id="men" class="cursor-pointer hover:text-[#56CFE1] px-1">men</div>
+                <div id="men_id" class="cursor-pointer hover:text-[#56CFE1] px-1">men</div>
                 <div id="men-dropdown"
                     class="absolute hidden  top-full mt-1 left-[-600px]  bg-white shadow-md  rounded-lg p-4 w-[1200px] gap-6 z-50">
                     <div class="w-1/2">
@@ -167,6 +181,25 @@
         setupDropdown("women");
         setupDropdown("men");
         setupDropdown("kids");
+
+
+        $(document).ready(function() {
+            $('.search_bar').click(function() {
+                $('#search_sidebar').toggleClass('hidden');
+            })
+            $('#search_sidebar').click(function(e) {
+                e.stopPropagation();
+                $('#search_sidebar').toggleClass('hidden');
+            })
+
+            $('.user_bar').click(function() {
+                console.log('hy')
+            })
+
+
+        })
+
+
     });
     </script>
 
