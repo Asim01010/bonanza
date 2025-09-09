@@ -21,21 +21,98 @@
         <div class="flex-1 flex justify-end space-x-4 text-2xl">
             <button class="search_bar"><i class="fa-solid fa-magnifying-glass font-light cursor-pointer"></i></button>
 
-            <div id="search_sidebar" class="fixed hidden bg-black/50 h-full w-full z-20  left-0 top-0">
-                <div class="absolute right-0 flex flex-col items-center bg-white h-full w-90 py-5 ">
+            <div id="search_sidebar" class="fixed inset-0 bg-black/50 h-full w-full z-20 left-0 top-0 hidden">
+                <div
+                    class="search_coming absolute right-0 flex flex-col items-center bg-white h-full w-80 p-5 transform translate-x-full transition-transform duration-300 ease-in-out">
 
-                    <div class="relatives  py-3 ">
-                        <input type="text" class="border">
-                        <button class="absolute top-8  right-12"><i class="fa-solid fa-magnifying-glass "></i></button>
+                    <div class="relative w-full py-3">
+                        <input type="text" class="border text-base px-3 py-2 w-full" placeholder="Search for products">
+                        <button class="absolute top-3 right-3"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </div>
                     <div class="p-[.3px] bg-gray-300 w-full"></div>
                 </div>
             </div>
             <button class="user_bar"><i class="fa-regular fa-user cursor-pointer"></i></button>
-            <button class=" "><i class="fa-regular fa-heart cursor-pointer"></i></button>
-            <button class=" "><i class="fa-solid fa-cart-shopping cursor-pointer"></i></button>
+            <div id="user_sidebar" class="fixed hidden bg-black/50 h-full w-full z-20  left-0 top-0">
+                <div
+                    class="absolute right-0 flex flex-col items-center bg-white  h-full w-90 p-5 transform translate-x-full transition-transform duration-300 ease-in-out ">
+
+                    <div class="relatives flex flex-col items-center gap-4 w-full py-3 ">
+                        <input type="text" class="border text-base px-3 py-2 w-full" placeholder="Username">
+                        <input type="password" class="border text-base px-3 py-2 w-full mt-3" placeholder="Password">
+
+                        <p class="text-sm text-gray-500 underline hover:text-[#66CFE1] transition cursor-pointer">forget
+                            password?</p>
+                        <button
+                            class="bg-red-700 text-white text-base px-4 py-2 w-full rounded hover:bg-red-800">Signin</button>
+                        <p class="text-sm text-gray-500 underline transition hover:text-[#66CFE1] cursor-pointer">New
+                            customer? Create your account</p>
+
+                    </div>
+                    <div class="p-[.3px] bg-gray-300 w-full"></div>
+                </div>
+            </div>
+            <button class="wishlist_bar "><i class="fa-regular fa-heart cursor-pointer"></i></button>
+            <div id="wishlist_sidebar" class="fixed hidden bg-black/50 h-full w-full z-20  left-0 top-0">
+                <div
+                    class="absolute right-0 flex flex-col items-center bg-white  h-full w-90 p-5 transform translate-x-full transition-transform duration-300 ease-in-out ">
+
+                    <div class="relatives flex flex-col items-center gap-4 w-full py-3 ">
+                        <p class="text-sm text-gray-500 underline transition hover:text-[#66CFE1] cursor-pointer">Your
+                            Wishlist is empty</p>
+                    </div>
+                    <div class="p-[.3px] bg-gray-300 w-full"></div>
+                </div>
+            </div>
+
+            <!-- the cart is here -->
+
+            <button class="cart_bar "><i class="fa-solid fa-cart-shopping cursor-pointer"></i></button>
+            <div id="cart_sidebar" class="fixed hidden bg-black/50 h-full w-full z-20  left-0 top-0">
+                <div
+                    class="absolute right-0 flex flex-col items-center bg-white  h-full w-90 p-5 transform translate-x-full transition-transform duration-300 ease-in-out ">
+
+                    <div class="relatives flex items-center gap-4 w-full py-3 ">
+                        <div><img src="./images/men-1.png" class="w-30 h-40" alt=""></div>
+                        <div>
+                            <p class="text-sm text-gray-500">Product Name</p>
+                            <p class="text-sm text-gray-500">Product Name</p>
+                            <div class="flex"><span class="text-gray-500 line-through">$50.99</span><span
+                                    class="text-red-500">$50.99</span></div>
+                            <div class="border rounded flex justify-between items-center min-w-[90px] px-1">
+                                <button class="cursor-pointer text-gray-600 hover:text-red-500">
+                                    <i class="fa-solid fa-trash text-sm"></i>
+                                </button>
+                                <span class="text-sm font-medium">1</span>
+                                <button class="cursor-pointer text-gray-600 hover:text-black text-lg">+</button>
+                            </div>
+                            <div class="flex py-3 gap-4 items-center"> <i
+                                    class="fa-regular fa-pen-to-square cursor-pointer text-gray-500 text-xl hover:text-[#66CFE1]"></i>
+                                <i
+                                    class="fa-solid fa-trash cursor-pointer text-gray-500 text-xl hover:text-red-500"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="p-[.3px] bg-gray-300 w-full"></div>
+                    <div class="fixed flex flex-col gap-2 bottom-0 left-0 right-0 bg-gray-100 shadow p-3">
+                        <div class=" w-full flex items-center justify-between">
+                            <span class="font-semibold text-lg">Subtotal:</span>
+                            <span class="font-bold text-xl ">$121.47 USD</span>
+
+                        </div>
+                        <p class="text-sm text-gray-500">Taxes and shipping calculated at checkout</p>
+                        <div class="flex flex-col gap-3 mt-3">
+                            <a href="./cart.php"
+                                class="bg-red-700 text-white text-center text-base px-4 py-2 w-full rounded hover:bg-red-800">View
+                                Cart</a>
+                            <a
+                                class="bg-black text-white text-center text-base px-4 py-2 w-full rounded hover:bg-gray-800">Checkout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
     </div>
 
     <hr class="border-none bg-gray-300 h-[1px]">
@@ -44,7 +121,7 @@
     <nav>
         <div class="flex items-center justify-center capitalize uppercase gap-6 p-2 font-normal relative">
 
-            <div class="cursor-pointer hover:text-[#56CFE1]">home</div>
+            <a href="./home.php" class="cursor-pointer hover:text-[#56CFE1]">home</a>
 
             <!-- SALE -->
             <div id="sale-container" class="relative dropdown">
@@ -184,22 +261,79 @@
 
 
         $(document).ready(function() {
+            // Search sidebar
             $('.search_bar').click(function() {
-                $('#search_sidebar').toggleClass('hidden');
-            })
+                $('#search_sidebar').removeClass('hidden'); // show overlay
+                $('#search_sidebar .search_coming')
+                    .removeClass('translate-x-full')
+                    .addClass('translate-x-0'); // slide in
+            });
+
             $('#search_sidebar').click(function(e) {
-                e.stopPropagation();
-                $('#search_sidebar').toggleClass('hidden');
-            })
+                if (e.target.id === 'search_sidebar') {
+                    $('#search_sidebar .search_coming')
+                        .removeClass('translate-x-0')
+                        .addClass('translate-x-full'); // slide out
+                    setTimeout(() => {
+                        $('#search_sidebar').addClass('hidden'); // hide after animation
+                    }, 300);
+                }
+            });
 
+            // User sidebar
             $('.user_bar').click(function() {
-                console.log('hy')
-            })
+                $('#user_sidebar').removeClass('hidden');
+                $('#user_sidebar > div')
+                    .removeClass('translate-x-full')
+                    .addClass('translate-x-0');
+            });
+
+            $('#user_sidebar').click(function(e) {
+                if (e.target.id === 'user_sidebar') {
+                    $('#user_sidebar > div')
+                        .removeClass('translate-x-0')
+                        .addClass('translate-x-full');
+                    setTimeout(() => {
+                        $('#user_sidebar').addClass('hidden');
+                    }, 300);
+                }
+            });
+        });
 
 
-        })
+        $('.wishlist_bar').click(function() {
+            $('#wishlist_sidebar').removeClass('hidden');
+            $('#wishlist_sidebar > div')
+                .removeClass('translate-x-full')
+                .addClass('translate-x-0');
+        });
+        $('#wishlist_sidebar').click(function(e) {
+            if (e.target.id === 'wishlist_sidebar') {
+                $('#wishlist_sidebar > div')
+                    .removeClass('translate-x-0')
+                    .addClass('translate-x-full');
+                setTimeout(() => {
+                    $('#wishlist_sidebar').addClass('hidden');
+                }, 300);
+            }
+        });
 
-
+        $('.cart_bar').click(function() {
+            $('#cart_sidebar').removeClass('hidden');
+            $('#cart_sidebar > div')
+                .removeClass('translate-x-full')
+                .addClass('translate-x-0');
+        });
+        $('#cart_sidebar').click(function(e) {
+            if (e.target.id === 'cart_sidebar') {
+                $('#cart_sidebar > div')
+                    .removeClass('translate-x-0')
+                    .addClass('translate-x-full');
+                setTimeout(() => {
+                    $('#cart_sidebar').addClass('hidden');
+                }, 300);
+            }
+        });
     });
     </script>
 
