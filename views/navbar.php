@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,7 +40,7 @@
 
                     <!-- Sale -->
                     <li
-                        class="w-full hover:bg-gray-100  rounded border-b border-gray-300 p-2 transition duration-300 ease-in-out">
+                        class="w-full hover:bg-gray-100  rounded bo rder-b border-gray-300 p-2 transition duration-300 ease-in-out">
                         <div
                             class="flex items-center justify-between cursor-pointer hover:text-[#ff4e00] dropdown-toggle">
                             <span>Sale</span>
@@ -110,8 +113,24 @@
         <div class="flex-1 flex items-center xl:block lg:block justify-center">
             <img src="./images/Bonanza_Logo.avif" alt="Logo" class="h-10">
         </div>
-        <div class="flex-1 flex justify-end space-x-4 text-2xl">
-            <button class="search_bar"><i class="fa-solid fa-magnifying-glass font-light cursor-pointer"></i></button>
+
+
+        <!-- user name -->
+        <?php
+ // always start session at the top
+include './config.php';
+
+// Show the logged-in user's email or name from session
+if (isset($_SESSION['user'])) {
+    echo "<div class='text-gray-800'> Welcome,    " . htmlspecialchars($_SESSION['user']['firstName']. " " . htmlspecialchars($_SESSION['user']['lastName'])) . "</div>";
+}
+?>
+
+
+
+        <div class="flex-1 flex justify-end space-x-4 text-xl">
+            <button class="search_bar"><i
+                    class="fa-solid fa-magnifying-glass font-light text- cursor-pointer"></i></button>
 
             <div id="search_sidebar" class="fixed inset-0 bg-black/50 h-full w-full z-20 left-0 top-0 hidden">
                 <div
@@ -125,28 +144,20 @@
                 </div>
             </div>
             <button class="user_bar"><i class="fa-regular fa-user cursor-pointer"></i></button>
-            <div id="user_sidebar" class="fixed hidden bg-black/50 h-full w-full z-20  left-0 top-0">
-                <div
-                    class="absolute right-0 flex flex-col items-center bg-white  h-full w-90 p-5 transform translate-x-full transition-transform duration-300 ease-in-out ">
 
-                    <div class="relatives flex flex-col items-center gap-4 w-full py-3 ">
-                        <input type="text" class="border text-base px-3 py-2 w-full" placeholder="Username">
-                        <input type="password" class="border text-base px-3 py-2 w-full mt-3" placeholder="Password">
 
-                        <p class="text-sm text-gray-500 underline hover:text-[#66CFE1] transition cursor-pointer">
-                            forget
-                            password?</p>
-                        <button
-                            class="bg-red-700 text-white text-base px-4 py-2 w-full rounded hover:bg-red-800">Signin</button>
-                        <p class="text-sm text-gray-500 underline transition hover:text-[#66CFE1] cursor-pointer">
-                            New
-                            customer? Create your account</p>
 
-                    </div>
-                    <div class="p-[.3px] bg-gray-300 w-full"></div>
-                </div>
-            </div>
-            <button class="wishlist_bar "><i class="fa-regular fa-heart cursor-pointer"></i></button>
+
+            <!-- Login/user page -->
+            <?= include('login-register.php')?>
+
+
+
+
+
+
+            <button class="wishlist_bar"><i class="fa-regular fa-heart cursor-pointer text-xl"></i></button>
+
             <div id="wishlist_sidebar" class="fixed hidden bg-black/50 h-full w-full z-20  left-0 top-0">
                 <div
                     class="absolute right-0 flex flex-col items-center bg-white  h-full w-90 p-5 transform translate-x-full transition-transform duration-300 ease-in-out ">
@@ -162,7 +173,7 @@
 
             <!-- the cart is here -->
 
-            <button class="cart_bar "><i class="fa-solid fa-cart-shopping cursor-pointer"></i></button>
+            <button class="cart_bar "><i class="fa-solid fa-cart-shopping cursor-pointer text-xl"></i></button>
             <div id="cart_sidebar" class="fixed hidden bg-black/50 h-full w-full z-20  left-0 top-0">
                 <div
                     class="absolute right-0 flex flex-col items-center bg-white  h-full w-90 p-5 transform translate-x-full transition-transform duration-300 ease-in-out ">
@@ -313,7 +324,7 @@
 
     <script>
     $(function() {
-        const HIDE_DELAY = 150;
+        const HIDE_DELAY = 50;
 
         function setupDropdown(baseId) {
             let hideTimeout = null;
