@@ -54,7 +54,7 @@
                         placeholder="Password">
 
                     <button type="submit"
-                        class="bg-red-700 text-white cursor-pointer text-base px-3 py-3 w-full rounded hover:bg-red-800">
+                        class="bg-red-700 text-white cursor-pointer text-base px-3 py-3 w-full rounded hover:bg-red-800 register_btn">
                         Register
                     </button>
 
@@ -135,6 +135,9 @@ $(document).ready(function() {
 
                     const msg = $("#successMsg");
                     msg.removeClass("hidden");
+
+
+                    // $('.register_btn').html('Register successfully!');
 
                     setTimeout(() => {
                         msg.removeClass("opacity-0 scale-95").addClass(

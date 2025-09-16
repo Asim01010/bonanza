@@ -134,11 +134,11 @@ if (isset($_SESSION['user'])) {
 
             <div id="search_sidebar" class="fixed inset-0 bg-black/50 h-full w-full z-20 left-0 top-0 hidden">
                 <div
-                    class="search_coming absolute right-0 flex flex-col items-center bg-white h-full w-80 p-5 transform translate-x-full transition-transform duration-300 ease-in-out">
+                    class="search_coming absolute w-90 right-0 flex flex-col items-center bg-white h-full w-80 p-5 transform translate-x-full transition-transform duration-300 ease-in-out">
 
                     <div class="relative w-full py-3">
                         <input type="text" class="border text-base px-3 py-2 w-full" placeholder="Search for products">
-                        <button class="absolute top-3 right-3"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <button class="absolute top-4 right-3"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </div>
                     <div class="p-[.3px] bg-gray-300 w-full"></div>
                 </div>
@@ -149,7 +149,7 @@ if (isset($_SESSION['user'])) {
 
 
             <!-- Login/user page -->
-            <?= include('login-register.php')?>
+            <?= include('./loginUser/login-register.php')?>
 
 
 
