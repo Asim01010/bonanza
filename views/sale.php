@@ -1,7 +1,7 @@
 <?php include "./navbar.php"; ?>
 
 <div id="filter-section"
-    class="flex py-5 justify-between items-center cursor-pointer px-10 border-b border-gray-300 relative overflow-y-auto">
+    class="flex py-5 justify-between items-center cursor-pointer px-10 border-b border-gray-300 relative ">
     <!-- filter icon -->
     <!-- Filter Button -->
     <div id="filterBtn" class="flex items-center gap-2 cursor-pointer">

@@ -122,7 +122,7 @@ include './config.php';
 
 // Show the logged-in user's email or name from session
 if (isset($_SESSION['user'])) {
-    echo "<div class='text-gray-800'> Welcome,    " . htmlspecialchars($_SESSION['user']['firstName']. " " . htmlspecialchars($_SESSION['user']['lastName'])) . "</div>";
+    echo "<div id='logout_div' class='text-gray-800'> Welcome,    " . htmlspecialchars($_SESSION['user']['firstName']. " " . htmlspecialchars($_SESSION['user']['lastName'])) . "</div>";
 }
 ?>
 
@@ -192,7 +192,7 @@ if (isset($_SESSION['user'])) {
                                 <span class="text-sm font-medium">1</span>
                                 <button class="cursor-pointer text-gray-600 hover:text-black text-lg">+</button>
                             </div>
-                            <div class="flex py-3 gap-4 items-center"> <i
+                            <div class="flex py-3 gap-4 items-center"><i
                                     class="fa-regular fa-pen-to-square cursor-pointer text-gray-500 text-xl hover:text-[#66CFE1]"></i>
                                 <i
                                     class="fa-solid fa-trash cursor-pointer text-gray-500 text-xl hover:text-red-500"></i>
@@ -231,7 +231,7 @@ if (isset($_SESSION['user'])) {
 
             <!-- SALE -->
             <div id="sale-container" class="relative dropdown">
-                <div id="sale" class="cursor-pointer hover:text-[#56CFE1] px-1">sale</div>
+                <a href="sale.php" id="sale" class="cursor-pointer hover:text-[#56CFE1] px-1">sale</a>
                 <div id="sale-dropdown"
                     class="absolute hidden  top-full mt-1 left-[-440px]  bg-white shadow-md  rounded-lg p-4 w-[1200px] gap-6 z-50">
                     <div class="w-[50%] relatives">
