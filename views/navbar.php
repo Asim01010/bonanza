@@ -121,9 +121,9 @@ session_start();
 include './config.php';
 
 // Show the logged-in user's email or name from session
-if (isset($_SESSION['user'])) {
-    echo "<div id='logout_div' class='text-gray-800'> Welcome,    " . htmlspecialchars($_SESSION['user']['firstName']. " " . htmlspecialchars($_SESSION['user']['lastName'])) . "</div>";
-}
+// if (isset($_SESSION['user'])) {
+//     echo "<div id='logout_div' class='text-gray-800'> Welcome,    " . htmlspecialchars($_SESSION['user']['firstName']. " " . htmlspecialchars($_SESSION['user']['lastName'])) . "</div>";
+// }
 ?>
 
 

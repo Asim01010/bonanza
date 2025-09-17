@@ -1,13 +1,10 @@
 <?php
 session_start();
 
-// clear all session variables
-$_SESSION = [];
+session_unset();
 
-// destroy session
 session_destroy();
 
-// return response for AJAX
-echo 'logout';
-exit;
+echo 'ok';
+
 ?>

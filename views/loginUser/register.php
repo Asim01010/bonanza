@@ -1,49 +1,49 @@
 <?php
 session_start();
-include './config.php';
+include '../config.php';
 
-$firstName = trim($_POST['firstName'] ?? '');
-$lastName  = trim($_POST['lastName'] ?? '');
-$email     = trim($_POST['email'] ?? '');
-$password  = $_POST['password'] ?? '';
+$fname = mysqli_real_escape_string($conn,$_POST['firstName']);
+$lname = mysqli_real_escape_string($conn,$_POST['lastName']);
+$email = mysqli_real_escape_string($conn,$_POST['email']);
+$password = mysqli_real_escape_string($conn,$_POST['password']);
 
-// Basic Validation 
-if ($firstName === '' || $lastName === '' || $email === '' || $password === '') {
+
+if ($fname === '' || $lname === '' || $email === '' || $password === '') {
     echo "required";
     exit;
 }
 
-// Hash password
-$hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+$hashpass = password_hash($password,PASSWORD_DEFAULT);
 
-// Check if email exists first
-$check = mysqli_query($conn, "SELECT u_id FROM user WHERE email = '".mysqli_real_escape_string($conn,$email)."' ");
-if (mysqli_num_rows($check) > 0) {
-    echo 'duplicate';
+// check if there is any duplicate id?
+$check_id = "SELECT u_id FROM user WHERE email = '$email' LIMIT 1";
+$check_res =mysqli_query($conn,$check_id);
+if ($check_res && mysqli_num_rows($check_res) > 0) {
+    echo "duplicate";
     exit;
 }
 
-// Insert new user
-$insert = "INSERT INTO user (firstName,lastName,email,password) 
-           VALUES (
-              '".mysqli_real_escape_string($conn,$firstName)."',
-              '".mysqli_real_escape_string($conn,$lastName)."',
-              '".mysqli_real_escape_string($conn,$email)."',
-              '$hashedPassword'
-           )";
 
-$result = mysqli_query($conn, $insert);
 
-if ($result) {
-    $user_id = mysqli_insert_id($conn);
-    $_SESSION['user'] = [
-        'id'        => $user_id,
-        'firstName' => $firstName,
-        'lastName'  => $lastName,
-        'email'     => $email
-    ];
-    echo 'ok';
-} else {
-    echo 'fail';
+$insert = "INSERT INTO user (firstName,lastName,email,password) VALUES ('$fname','$lname','$email','$hashpass')";
+
+$result = mysqli_query($conn,$insert);
+
+if($result){
+$id = mysqli_insert_id($conn);
+$_SESSION['user']= [
+'id' => $id,
+'firstname' => $fname,
+'lastname' => $lname,
+'email' => $email,
+];
+echo 'ok';
+
+
+}else{
+    echo "fail";
 }
+
+
+
 ?>

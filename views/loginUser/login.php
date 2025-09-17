@@ -1,34 +1,45 @@
 <?php
 session_start();
-include './config.php';
+include '../config.php';
 
-$email = $_POST['u_email'] ?? '';
-$password = $_POST['u_password'] ?? '';
+$fname = trim($_POST['u_email'] ?? ''); 
+$password = trim($_POST['u_password'] ?? ''); 
 
-if (empty($email) || empty($password)) {
-    echo "invalid";
+
+if($fname === '' || $password === ''){
+    echo 'required all fields';
     exit;
 }
 
-$findUser = "SELECT * FROM user WHERE email = '$email' LIMIT 1";
-$result = mysqli_query($conn, $findUser);
+$e = mysqli_real_escape_string($conn, $fname);
 
-if ($result && mysqli_num_rows($result) > 0) {
-    $user = mysqli_fetch_assoc($result);
-    if (password_verify($password, $user['password'])) {
+$q = "SELECT * FROM user WHERE email = '$e' LIMIT 1";
+
+$res = mysqli_query($conn,$q);
+
+if ($res && mysqli_num_rows($res) === 1) {
+    $user = mysqli_fetch_assoc($res);
+    // Compare plain password
+    if (password_verify($password,$user['password'])) {
+        // correct -> store session and send 'ok'
         $_SESSION['user'] = [
-            'id'        => $user['id'],
+            'id' => $user['u_id'],
             'firstName' => $user['firstName'],
-            'lastName'  => $user['lastName'],
-            'email'     => $user['email']
+            'lastName' => $user['lastName'],
+            'email' => $user['email']
         ];
         echo "ok";
         exit;
     } else {
-        echo "invalid";
+        // wrong password
+        echo "invalid password";
         exit;
     }
 } else {
-    echo "invalid";
+    // no such email
+    echo "invalid email";
     exit;
 }
+
+
+?>

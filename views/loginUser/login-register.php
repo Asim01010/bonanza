@@ -17,9 +17,12 @@
 
                     <button type="submit"
                         class="bg-red-700 cursor-pointer text-white text-base px-4 py-2 w-full rounded hover:bg-red-800">
-                        <?php echo isset($_SESSION['user']) ? "You're login successfully" : "Signin"; ?>
+                        Signin
                     </button>
-
+                    <p id="successLogin"
+                        class="opacity-0 scale-95 hidden text-green-700 bg-green-100 rounded w-full text-sm transition-all duration-500 ease-in-out p-3 text-center">
+                        You are successfully Login
+                    </p>
 
                     <p id="create_account"
                         class="text-sm text-gray-500 underline transition hover:text-[#66CFE1] cursor-pointer">
@@ -67,13 +70,11 @@
                         class="opacity-0 scale-95 hidden text-green-700 bg-green-100 rounded w-full text-sm transition-all duration-500 ease-in-out p-3 text-center">
                         You are successfully registered
                     </p>
-
-                    <?php if(isset($_SESSION['duplicate_entry'])){ ?>
                     <p
                         class="opacity-0 scale-95 hidden text-red-700 bg-red-100 rounded w-full text-sm transition-all duration-500 ease-in-out p-3 text-center">
                         Duplicate Entry
                     </p>
-                    <?php } ?>
+
                 </div>
             </form>
         </div>
@@ -82,6 +83,14 @@
         <!-- Logout form -->
         <div id="user_logout"
             class="absolute right-0 flex flex-col items-center bg-white h-full w-90 p-5 transition-all duration-300 ease-in-out <?php echo isset($_SESSION['user']) ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'; ?>">
+
+
+
+            <div id="user_data" class="flex flex-col items-center justify-center">
+
+            </div>
+
+
 
             <form class="logout" action="logout.php" method="POST" style="width: 100%;">
                 <button type="submit" data-id="<?php echo $_SESSION['user']['id'] ?? ''; ?>"
@@ -94,9 +103,10 @@
                     You are already logged in, Dear Customer!
                 </p>
             </form>
-            <p class="text-gray-800 bg-gray-100 w-full hidden rounded-2 p-3 text-sm text-center logout_div ">You are
-                Logged Out
-                Successfully!</p>
+            <p id="successLogout"
+                class="opacity-0 scale-95 hidden text-red-700 bg-red-100 rounded w-full text-sm transition-all duration-500 ease-in-out p-3 text-center">
+                You are successfully Logout
+            </p>
         </div>
     </div>
     <script>
@@ -117,113 +127,100 @@ $(document).ready(function() {
             .removeClass('opacity-0 scale-95 pointer-events-none');
     });
 
+    // Helper → show a message instantly then hide after 1s
+    function showMessage(selector) {
+        const msg = $(selector);
+        msg.removeClass('hidden opacity-0 scale-95')
+            .addClass('opacity-100 scale-100');
 
-    // Register form AJAX
+        setTimeout(() => {
+            msg.addClass('opacity-0 scale-95')
+                .removeClass('opacity-100 scale-100');
+
+            setTimeout(() => {
+                msg.addClass('hidden');
+            }, 300); // give transition time
+        }, 1000);
+    }
+
+    // REGISTER
     $('.register').on('submit', function(e) {
         e.preventDefault();
-
         $.ajax({
-            url: 'register.php', // make sure this file exists!
+            url: 'loginUser/register.php',
             type: 'POST',
             data: $(this).serialize(),
-            success: function(resp) {
-                resp = resp.trim(); // clean spaces
-
-                if (resp === 'ok') {
-                    console.log('register ok');
+            success: function(res) {
+                res = res.trim();
+                if (res === 'ok') {
                     $(".register")[0].reset();
 
-                    const msg = $("#successMsg");
-                    msg.removeClass("hidden");
-
-
-                    // $('.register_btn').html('Register successfully!');
+                    // ✅ Show success message
+                    showMessage('#successMsg');
 
                     setTimeout(() => {
-                        msg.removeClass("opacity-0 scale-95").addClass(
-                            "opacity-100 scale-100");
-                    }, 50);
-
-                    // After success → switch to login form
-                    setTimeout(() => {
-                        msg.addClass("hidden");
-                        $('#login_here').trigger('click');
-                    }, 3000);
-
-                } else if (resp === 'duplicate') {
-                    alert("Email already exists!");
-                } else if (resp === 'required') {
-                    alert("All fields are required!");
-                } else {
-                    alert("Something went wrong: " + resp);
-                }
-            }
-        })
-    });
-
-
-    // Logout AJAX
-    $('.logout').on('submit', function(e) {
-        e.preventDefault();
-
-        $.ajax({
-            url: 'logout.php',
-            type: 'POST',
-            success: function(resp) {
-                if (resp === 'logout') {
-                    $('.logout_div').removeClass('hidden').fadeIn(300);
-
-
-                    setTimeout(() => {
-                        $('.logout_div').fadeOut(300);
-
-                        // Hide logout, show login
-                        $('#user_logout').addClass(
+                        $('#Register_login').addClass(
                                 'opacity-0 scale-95 pointer-events-none')
                             .removeClass('opacity-100 scale-100');
-                        $('#user_login').addClass('opacity-100 scale-100')
+                        $('#user_logout').addClass('opacity-100 scale-100')
                             .removeClass('opacity-0 scale-95 pointer-events-none');
-
-                        // Reset button text
-                        $('.login button[type=submit]').text('Signin');
-                    }, 2000);
+                    }, 1000);
                 }
-            },
+            }
         });
     });
 
-    // Login AJAX
+    // LOGIN
     $('.login').on('submit', function(e) {
         e.preventDefault();
-
         $.ajax({
-            url: 'login.php',
+            url: 'loginUser/login.php',
             type: 'POST',
             data: $(this).serialize(),
-            success: function(resp) {
-                if (resp === 'ok') {
-                    $('.login')[0].reset();
+            success: function(res) {
+                res = res.trim();
+                if (res === 'ok') {
+                    $(".login")[0].reset();
 
-                    // Show success message
-                    $('#loginSuccess').removeClass('hidden');
+                    // ✅ Show login message
+                    showMessage('#successLogin');
 
                     setTimeout(() => {
-                        $('#loginSuccess').addClass('hidden');
-
-                        // Switch forms without reload
                         $('#user_login').addClass(
                                 'opacity-0 scale-95 pointer-events-none')
                             .removeClass('opacity-100 scale-100');
                         $('#user_logout').addClass('opacity-100 scale-100')
                             .removeClass('opacity-0 scale-95 pointer-events-none');
-                    }, 1500);
-
-                } else if (resp === 'invalid') {
-                    alert("Invalid email or password!");
+                    }, 1000);
+                } else {
+                    alert("Invalid Email or Password");
                 }
             }
-        })
+        });
     });
 
+    // LOGOUT
+    $('.logout').on('submit', function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: 'loginUser/logout.php',
+            type: 'POST',
+            success: function(res) {
+                res = res.trim();
+                if (res === 'ok') {
+                    // ✅ Show logout message
+                    showMessage('#successLogout');
+
+                    setTimeout(() => {
+                        $('#user_logout').addClass(
+                                'opacity-0 scale-95 pointer-events-none')
+                            .removeClass('opacity-100 scale-100');
+                        $('#user_login').addClass('opacity-100 scale-100')
+                            .removeClass('opacity-0 scale-95 pointer-events-none');
+                    }, 1000);
+                }
+            }
+        });
+    });
 });
     </script>
