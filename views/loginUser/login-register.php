@@ -93,6 +93,7 @@
 
 
             <form class="logout" action="logout.php" method="POST" style="width: 100%;">
+                <!-- <div id="user-name"></div> -->
                 <button type="submit" data-id="<?php echo $_SESSION['user']['id'] ?? ''; ?>"
                     class="bg-red-700 text-white cursor-pointer text-base px-4 py-2 w-full rounded hover:bg-red-800">
                     Logout
@@ -155,6 +156,8 @@ $(document).ready(function() {
                 if (res === 'ok') {
                     $(".register")[0].reset();
 
+                    loadUser();
+
                     // ✅ Show success message
                     showMessage('#successMsg');
 
@@ -182,6 +185,7 @@ $(document).ready(function() {
                 if (res === 'ok') {
                     $(".login")[0].reset();
 
+                    loadUser();
                     // ✅ Show login message
                     showMessage('#successLogin');
 
@@ -222,5 +226,33 @@ $(document).ready(function() {
             }
         });
     });
+
+    // load current user name from session and render HTML
+    function loadUser() {
+        $.get('loginUser/get_user.php', function(response) {
+            response = response.trim(); // extra spaces remove karo
+
+            if (response) {
+                // simple HTML with color styling
+                var html = `<p class="welcome" style="font-weight:600"> Welcome to Our shop
+                          <p style="color:#9F0712; display:block; text-align:center; padding:10px 2px; ">${response}</p>
+                        </p>`;
+                $('#user_data').html(html);
+                $('#user-name').html(html); // optional navbar placeholder
+            } else {
+                // clear if no user
+                $('#user_data').html('');
+                $('#user-name').html('');
+            }
+        }).fail(function() {
+            console.error("Failed to fetch user");
+        });
+    }
+
+
+
+    loadUser();
+
+
 });
     </script>

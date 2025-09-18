@@ -11,6 +11,15 @@ if($fname === '' || $password === ''){
     exit;
 }
 
+
+// return plain full name or empty string
+if (!empty($_SESSION['user']['firstName']) || !empty($_SESSION['user']['lastName'])) {
+    // trim to avoid accidental spaces
+    echo trim( ($_SESSION['user']['firstName'] ?? '') . ' ' . ($_SESSION['user']['lastName'] ?? '') );
+} else {
+    echo '';
+}
+
 $e = mysqli_real_escape_string($conn, $fname);
 
 $q = "SELECT * FROM user WHERE email = '$e' LIMIT 1";

@@ -1,16 +1,15 @@
 <?php
-include '../config.php';
+session_start();
 
-$fetch = "SELECT * FROM user";
+if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
+    $firstName = $_SESSION['user']['firstName'] ?? '';
+    $lastName  = $_SESSION['user']['lastName'] ?? '';
 
-$result = mysqli_query($conn,$fetch);
-
-foreach ($result as $item){
-    ?>
-<span class="text-xl font-semibold">Welcome!</span>
-<span class="text-gray-600"><?php echo $item['firstName']?></span>
-<span class="text-gray-600"><?php echo $item['lastName']?></span>
-<?php
+    if ($firstName || $lastName) {
+        echo "" . htmlspecialchars($firstName . " " . $lastName);
+    } else {
+        echo "Welcome to our shop, Customer";
+    }
+} else {
+    echo "";
 }
-
-?>

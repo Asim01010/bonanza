@@ -15,6 +15,15 @@ if ($fname === '' || $lname === '' || $email === '' || $password === '') {
 
 $hashpass = password_hash($password,PASSWORD_DEFAULT);
 
+
+// return plain full name or empty string
+// if (!empty($_SESSION['user']['firstName']) || !empty($_SESSION['user']['lastName'])) {
+//     // trim to avoid accidental spaces
+//     echo trim( ($_SESSION['user']['firstName'] ?? '') . ' ' . ($_SESSION['user']['lastName'] ?? '') );
+// } else {
+//     echo '';
+// }
+
 // check if there is any duplicate id?
 $check_id = "SELECT u_id FROM user WHERE email = '$email' LIMIT 1";
 $check_res =mysqli_query($conn,$check_id);
@@ -33,8 +42,8 @@ if($result){
 $id = mysqli_insert_id($conn);
 $_SESSION['user']= [
 'id' => $id,
-'firstname' => $fname,
-'lastname' => $lname,
+'firstName' => $fname,
+'lastName' => $lname,
 'email' => $email,
 ];
 echo 'ok';
