@@ -36,16 +36,30 @@
             <div class="w-[25%] bg-blue-500  h-full ">
                 <img src="./images/new_arrival.webp" alt="" class="h-full w-full bg-black">
             </div>
-            <div class="w-[75%] p-2 h-full flex overflow-hidden">
+            <div class="w-[75%] p-2 h-full flex gap-5 overflow-hidden">
+                <?php 
+include './config.php';
+$sql = "SELECT * FROM product 
+        WHERE category_id = (SELECT c_id FROM categories WHERE c_name='kids')";
+        
+$result = mysqli_query($conn, $sql);
 
-                <div class="flex flex-col items-center justify-center  text-center ">
-                    <img src="./images/arriva_2.png" class="object-contain w-65 rounded-md" alt="">
-                    <p class="text-black">BOYS COMBO DJVS-3210</p>
+while($row = mysqli_fetch_assoc($result)){ 
+?>
+                <div class="flex flex-col items-center justify-center  text-center " style="cursor: pointer;">
+                    <img src="./images/<?= $row['p_image']?>" class="object-contain w-65 rounded-md" alt="">
+                    <p class="text-black"><?= $row['p_name']?></p>
                     <div class="flex gap-3">
-                        <span class="text-gray-500 line-through">$59.99</span>
-                        <span class="text-red-500 font-semibold">$49.99</span>
+                        <span class="text-gray-500 line-through">$<?= number_format($row['P_basePrice'],2)?></span>
+                        <span
+                            class="text-red-500 font-semibold">$<?= number_format($row['p_discounted_proce'],2)?></span>
                     </div>
                 </div>
+
+                <?php }?>
+
+
+
 
             </div>
 
@@ -91,56 +105,13 @@
         </div>
         <div id="fragrance" class="flex items-center justify-center px-12 h-[450px] gap-5">
 
-            <div class="w-[25%] bg-blue-500  h-full ">
-                <img src="./images/Fragrances_Tile_large.webp" alt="" class="h-full w-full bg-black">
-            </div>
-            <div class="w-[75%] p-2 h-full flex overflow-hidden gap-5">
 
-                <div class="flex flex-col items-center justify-center  text-center ">
-                    <img src="./images/frag-2.png" class="object-contain w-65 rounded-md" alt="">
-                    <p class="text-black">BOYS COMBO DJVS-3210</p>
-                    <div class="flex gap-3">
-                        <span class="text-gray-500 line-through">$59.99</span>
-                        <span class="text-red-500 font-semibold">$49.99</span>
-                    </div>
-                </div>
-                <div class="flex flex-col items-center justify-center  text-center ">
-                    <img src="./images/frag-2.png" class="object-contain w-65 rounded-md" alt="">
-                    <p class="text-black">BOYS COMBO DJVS-3210</p>
-                    <div class="flex gap-3">
-                        <span class="text-gray-500 line-through">$59.99</span>
-                        <span class="text-red-500 font-semibold">$49.99</span>
-                    </div>
-                </div>
-                <div class="flex flex-col items-center justify-center  text-center ">
-                    <img src="./images/frag-2.png" class="object-contain w-65 rounded-md" alt="">
-                    <p class="text-black">BOYS COMBO DJVS-3210</p>
-                    <div class="flex gap-3">
-                        <span class="text-gray-500 line-through">$59.99</span>
-                        <span class="text-red-500 font-semibold">$49.99</span>
-                    </div>
-                </div>
-                <div class="flex flex-col items-center justify-center  text-center ">
-                    <img src="./images/frag-2.png" class="object-contain w-65 rounded-md" alt="">
-                    <p class="text-black">BOYS COMBO DJVS-3210</p>
-                    <div class="flex gap-3">
-                        <span class="text-gray-500 line-through">$59.99</span>
-                        <span class="text-red-500 font-semibold">$49.99</span>
-                    </div>
-                </div>
-                <div class="flex flex-col items-center justify-center  text-center ">
-                    <img src="./images/frag-2.png" class="object-contain w-65 rounded-md" alt="">
-                    <p class="text-black">BOYS COMBO DJVS-3210</p>
-                    <div class="flex gap-3">
-                        <span class="text-gray-500 line-through">$59.99</span>
-                        <span class="text-red-500 font-semibold">$49.99</span>
-                    </div>
-                </div>
 
-            </div>
-            <div class="text-center self-end"><button
-                    class="bg-black text-white my-4 p-3 px-8 rounded-sm cursor-pointer whitespace-nowrap">View
-                    all</button></div>
+
+        </div>
+        <div class="text-center self-end"><button
+                class="bg-black text-white my-4 p-3 px-8 rounded-sm cursor-pointer whitespace-nowrap">View
+                all</button></div>
         </div>
 
 
@@ -159,113 +130,80 @@
                         now</button>
                 </div>
             </div>
+            <?php
+                  include './config.php';
+                  $fetch = "SELECT * FROM product WHERE  category_id = (SELECT c_id FROM categories WHERE c_name='Fragrance')";
+                  $products =[];
+                  $result = mysqli_query($conn,$fetch);
+                  while($row = mysqli_fetch_assoc($result)){
+                  $products[] = $row;
+                  }
+
+// Split into groups of 2 (for slider)
+                   $chunks = array_chunk($products, 2);
+                   ?>
             <div class="bg-gray-100 p-5 flex items-center gap-3">
                 <div class="container h-full mx-auto py-10">
                     <div class="relative w-full h-full max-w-4xl mx-auto group">
                         <!-- Slider Container -->
                         <div class="slider overflow-hidden">
                             <div class="slides flex transition-transform duration-500 ease-in-out">
-                                <!-- Slide 1 -->
+
+                                <?php foreach ($chunks as $chunk) : ?>
+                                <!-- One Slide -->
                                 <div class="slide flex-none w-full px-2">
                                     <div class="flex space-x-4">
+
+                                        <?php foreach ($chunk as $product) : ?>
+                                        <!-- One Product -->
                                         <div class="w-1/2">
-                                            <div class=" overflow-hidden relative "> <img src="./images/frag-2.png"
-                                                    alt="Product 1"
-                                                    class="w-full h-100 object-cover hover:scale-110 transition-transform duration-500 ease-in-out  rounded-lg shadow-md">
-                                                <div
-                                                    class="absolute rounded-full flex items-center justify-center bg-[#ff4e00] h-12 w-12  top-2 right-2  transition-opacity duration-300">
-                                                    <p>-25%</p>
-                                                </div>
-                                            </div>
-                                            <div class="mt-2 ">
-                                                <h3 class="text-lg font-semibold">Product 1</h3>
-                                                <p class="text-sm text-gray-600">Elegant design, perfect for daily use.
-                                                </p>
-                                                <div class="flex">
-                                                    <p class="text-md font-bold line-through text-gray-500">$79.99</p>
-                                                    <p class="text-md font-bold text-red-500">$79.99</p>
-
-                                                </div>
-                                                <button
-                                                    class="bg-black text-white my-4 p-3 px-8 rounded-sm cursor-pointer whitespace-nowrap">Add
-                                                    to Cart</button>
-                                            </div>
-                                        </div>
-                                        <div class="w-1/2 overflow-hidden">
                                             <div class="overflow-hidden relative">
-                                                <img src="./images/frag-4.png" alt="Product 2"
-                                                    class="w-full h-100 object-cover hover:scale-110 transition-transform duration-500 ease-in-out  rounded-lg shadow-md">
-                                                <div
-                                                    class="absolute rounded-full flex items-center justify-center bg-[#ff4e00] h-12 w-12  top-2 right-2  transition-opacity duration-300">
-                                                    <p>-25%</p>
-                                                </div>
+                                                <img src="./images/<?php echo $product['p_image']; ?>"
+                                                    alt="<?php echo $product['p_name']; ?>" class="w-full h-100 object-cover hover:scale-110 transition-transform
+                                                duration-500 ease-in-out rounded-lg shadow-md">
                                             </div>
-                                            <div class="mt-2 ">
-                                                <h3 class="text-lg font-semibold">Product 2</h3>
-                                                <p class="text-sm text-gray-600">Durable and stylish, a great choice.
+
+                                            <div class="mt-2">
+                                                <h3 class="text-lg font-semibold">
+                                                    <?php echo $product['p_name']; ?>
+                                                </h3>
+                                                <p class="text-sm text-gray-600">
+                                                    <?php echo $product['p_description']; ?>
                                                 </p>
+
                                                 <div class="flex">
-                                                    <p class="text-md font-bold line-through text-gray-500">$79.99</p>
-                                                    <p class="text-md font-bold text-red-500">$79.99</p>
-
+                                                    <?php if (!empty($product['P_basePrice'])) : ?>
+                                                    <p class="text-md font-bold line-through text-gray-500">
+                                                        $<?php echo number_format($product['P_basePrice'], 2); ?>
+                                                    </p>
+                                                    <?php endif; ?>
+                                                    <p class="text-md font-bold text-red-500 ml-2">
+                                                        $<?php echo number_format($product['p_discounted_proce'], 2); ?>
+                                                    </p>
                                                 </div>
+
                                                 <button
-                                                    class="bg-black text-white my-4 p-3 px-8 rounded-sm cursor-pointer whitespace-nowrap">Add
-                                                    to Cart</button>
+                                                    class="frag_btn bg-black text-white my-4 p-3 px-8 rounded-sm cursor-pointer whitespace-nowrap"
+                                                    data-id="<?= $product['p_id']?>"
+                                                    data-name="<?= $product['p_name']?>"
+                                                    data-image="<?= $product['p_image']?>"
+                                                    data-discounted="<?= $product['p_discounted_proce']?>"
+                                                    data-baseprice="<?= $product['P_basePrice']?>">
+                                                    Add to Cart
+                                                </button>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <!-- Slide 2 -->
-                                <div class="slide flex-none w-full px-2">
-                                    <div class="flex space-x-4">
-                                        <div class="w-1/2 overflow-hidden">
-                                            <img src="./images/frag-3 overflow-hidden.png" alt="Product 3"
-                                                class="w-full h-100 object-cover hover:scale-110 transition-transform duration-500 ease-in-out  rounded-lg shadow-md">
-                                            <div class="mt-2 ">
-                                                <h3 class="text-lg font-semibold">Product 3</h3>
-                                                <p class="text-sm text-gray-600">Premium quality, long-lasting.</p>
+                                        <!-- End Product -->
+                                        <?php endforeach; ?>
 
-                                            </div>
+                                    </div>
+                                </div>
+                                <!-- End Slide -->
+                                <?php endforeach; ?>
 
-                                        </div>
-                                        <div class="w-1/2 overflow-hidden">
-                                            <img src="./images/frag-2.png" alt="Product 4"
-                                                class="w-full h-100 object-cover hover:scale-110 transition-transform duration-500 ease-in-out  rounded-lg shadow-md">
-                                            <div class="mt-2 ">
-                                                <h3 class="text-lg font-semibold">Product 4</h3>
-                                                <p class="text-sm text-gray-600">Sleek and modern, highly rated.</p>
-                                                <p class="text-md font-bold">$89.99</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Slide 3 -->
-                                <div class="slide flex-none w-full px-2">
-                                    <div class="flex space-x-4">
-                                        <div class="w-1/2 overflow-hidden">
-                                            <img src="./images/frag-3.png" alt="Product 5"
-                                                class="w-full h-100 object-cover hover:scale-110 transition-transform duration-500 ease-in-out  rounded-lg shadow-md">
-                                            <div class="mt-2 ">
-                                                <h3 class="text-lg font-semibold">Product 5</h3>
-                                                <p class="text-sm text-gray-600">Comfortable and versatile.</p>
-                                                <p class="text-md font-bold">$69.99</p>
-                                            </div>
-                                        </div>
-                                        <div class="w-1/2 overflow-hidden">
-                                            <img src="./images/frag-4.png" alt="Product 6"
-                                                class="w-full h-100 object-cover hover:scale-110 transition-transform duration-500 ease-in-out  rounded-lg shadow-md">
-                                            <div class="mt-2 ">
-                                                <h3 class="text-lg font-semibold">Product 6</h3>
-                                                <p class="text-sm text-gray-600">Top-tier performance, budget-friendly.
-                                                </p>
-                                                <p class="text-md font-bold">$99.99</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
+
                         <!-- Navigation Buttons -->
                         <button
                             class="prev absolute top-1/2 left-4 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-gray-200">
@@ -373,6 +311,33 @@
                 updateSlider();
             });
         });
+
+        $('.frag_btn').on('click', function(e) {
+            e.preventDefault();
+
+            let product_id = $(this).data("id"); // ✅ matches data-id
+            let product_name = $(this).data("name"); // ✅ matches data-name
+            let product_Bprice = $(this).data("baseprice"); // ✅ matches data-baseprice
+            let product_Dprice = $(this).data("discounted"); // ✅ matches data-discounted
+            let product_image = $(this).data("image"); // ✅ matches data-image
+
+            $.ajax({
+                url: "./cart/cart_action.php",
+                type: "POST",
+                data: {
+                    id: product_id,
+                    name: product_name,
+                    Bprice: product_Bprice,
+                    Dprice: product_Dprice,
+                    image: product_image,
+                },
+                success: function(resp) {
+                    console.log("Cart updated:", resp);
+                    // loadcart(); // refresh cart if you made this function
+                },
+            });
+        });
+
     });
     </script>
 
